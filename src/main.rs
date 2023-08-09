@@ -25,7 +25,7 @@ use subxt::{OnlineClient, PolkadotConfig};
 pub const CALLER_SIGNER: &str = "5ExcvnRUfE9dWBgma5DCVeENgiq2jEo1cY4pW7J8yqvjTE3C";
 pub const CALLER_PHRASE: &str =
     "flag repeat rubber donate track dish author target company ritual frame report";
-pub const CONTRACT_ADDRESS: &str = "gr5mRsU2trS8TqSHUVjeJKjT979qnwFY81ee354Y9AXxs367Y";
+pub const CONTRACT_ADDRESS: &str = "gr2ChZDqPRYEDF2zU9tPDyUmBeFv2mGsu2Xu4Uocf2e8C6oNq";
 pub const CONTRACT_METADATA: &str = "./resources/rantai_suplai.json";
 // pub const CONTRACT_METHOD: &str = "register_product";
 pub const CONTRACT_METHOD: &str = "register_out_factory";
@@ -86,16 +86,15 @@ async fn main() -> anyhow::Result<()> {
     while let Some(line_result) = reader.next().await {
         let line = line_result.expect("Failed to read line");
         let parsed_line: Vec<&str> = line.split("-").collect();
-        // let batch_id = parsed_line[0].trim().to_string();
-        // let product_id = parsed_line[1].trim().to_string();
-        let batch_id = "sasa".to_string();
-        let product_id = "123".to_string();
-        // println!("b_id = {}", batch_id);
-        // println!("p_id = {}", product_id);
+        let batch_id = parsed_line[0].trim();
+        let product_id = parsed_line[1].trim();
+        let quote_char = "\"";
+        let mod_batch_id = format!("{}{}{}", quote_char,batch_id,quote_char);
+        let mod_product_id = format!("{}{}{}", quote_char,product_id,quote_char);
 
-        // let msg_args = [stringify!("BAB"), stringify!("22")];
-        // let msg_args = [stringify!("{}", batch_id), stringify!(product_id)];
-        let msg_args = [batch_id, product_id];
+        let msg_args = [mod_batch_id, mod_product_id];
+        
+        println!("{:?}", msg_args);
 
         // Message
         let sender_as_signer =
@@ -106,7 +105,7 @@ async fn main() -> anyhow::Result<()> {
         };
         let contract_transcoder = ContractMessageTranscoder::load(CONTRACT_METADATA)?;
         println!("sampai sini 1");
-        let write_message = contract_transcoder.encode(CONTRACT_METHOD, msg_args)?;
+        let write_message = contract_transcoder.encode(CONTRACT_METHOD, &msg_args)?;
 
         println!("sampai sini 2");
         let contract_as_multiaddress = MultiAddress::from(contract_as_account.clone());
