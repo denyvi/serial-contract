@@ -25,8 +25,8 @@ use subxt::{OnlineClient, PolkadotConfig};
 pub const CALLER_SIGNER: &str = "5ExcvnRUfE9dWBgma5DCVeENgiq2jEo1cY4pW7J8yqvjTE3C";
 pub const CALLER_PHRASE: &str =
     "flag repeat rubber donate track dish author target company ritual frame report";
-pub const CONTRACT_ADDRESS: &str = "gr2ChZDqPRYEDF2zU9tPDyUmBeFv2mGsu2Xu4Uocf2e8C6oNq";
-pub const CONTRACT_METADATA: &str = "./resources/rantai_suplai.json";
+pub const CONTRACT_ADDRESS: &str = "gr4LugUgbox1qh3JdjMsecmqREXvDCmAwVc5GhyhQjgei3HyS";
+pub const CONTRACT_METADATA: &str = "/home/orangepi/try_serial/resources/rantai_suplai.json";
 // pub const CONTRACT_METHOD: &str = "register_product";
 pub const CONTRACT_METHOD: &str = "register_out_factory";
 // pub const CONTRACT_METHOD: &str = "register_supplier_arrived";
@@ -93,8 +93,11 @@ async fn main() -> anyhow::Result<()> {
         let mod_product_id = format!("{}{}{}", quote_char,product_id,quote_char);
 
         let msg_args = [mod_batch_id, mod_product_id];
+        // let msg_args = [stringify!("AAA"), stringify!("2")];
         
-        println!("{:?}", msg_args);
+        println!("\n[Message]");
+        println!("=> method   : {}", CONTRACT_METHOD);
+        println!("=> args     : {:?}", msg_args);
 
         // Message
         let sender_as_signer =
@@ -104,12 +107,8 @@ async fn main() -> anyhow::Result<()> {
             ref_time: LIMIT_REF_TIME,
         };
         let contract_transcoder = ContractMessageTranscoder::load(CONTRACT_METADATA)?;
-        println!("sampai sini 1");
         let write_message = contract_transcoder.encode(CONTRACT_METHOD, &msg_args)?;
-
-        println!("sampai sini 2");
         let contract_as_multiaddress = MultiAddress::from(contract_as_account.clone());
-        println!("sampai sini 3");
         let extrinsic_message = extrinsic().contracts().call(
             contract_as_multiaddress,
             0,
@@ -117,7 +116,6 @@ async fn main() -> anyhow::Result<()> {
             None,
             write_message,
         );
-        println!("sampai sini 4");
 
         // API
         let extrinsic_client =
@@ -126,7 +124,7 @@ async fn main() -> anyhow::Result<()> {
             .tx()
             .sign_and_submit_then_watch_default(&extrinsic_message, &sender_as_signer)
             .await?;
-        println!("\n[Contract Call Sent]");
+        println!("[Contract Call Sent]");
         println!("=> hash     : {}", extrinsic_progress.extrinsic_hash());
 
         // Event filtering
@@ -141,7 +139,7 @@ async fn main() -> anyhow::Result<()> {
         {
             let goro::contracts::events::Called { caller, contract } = contract_event;
 
-            println!("\n[Contract Called]");
+            println!("[Contract Called]");
             println!("=> caller   : {}", AccountId32::new(caller.0));
             println!("=> contract : {}", AccountId32::new(contract.0));
         }

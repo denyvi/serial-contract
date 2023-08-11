@@ -1,6 +1,6 @@
 {
   "source": {
-    "hash": "0xf3a92c7e61b80af1d18173a574c774d00356fe8d271f127b993661ba8d3a2a67",
+    "hash": "0xcbf230f38eb6da101e34f8668e1405cf2ca1ecf86437d542effc02fda8835207",
     "language": "ink! 4.2.1",
     "compiler": "rustc 1.69.0",
     "build_info": {
@@ -26,7 +26,7 @@
         "args": [],
         "default": false,
         "docs": [
-          "Constructor that initializes the `bool` value to the given `init_value`."
+          "Constructor that initializes the `RantaiSuplai` to the given `init_value`."
         ],
         "label": "new",
         "payable": false,
@@ -46,38 +46,38 @@
         "displayName": [
           "AccountId"
         ],
-        "type": 1
+        "type": 0
       },
       "balance": {
         "displayName": [
           "Balance"
         ],
-        "type": 15
+        "type": 17
       },
       "blockNumber": {
         "displayName": [
           "BlockNumber"
         ],
-        "type": 18
+        "type": 20
       },
       "chainExtension": {
         "displayName": [
           "ChainExtension"
         ],
-        "type": 19
+        "type": 21
       },
       "hash": {
         "displayName": [
           "Hash"
         ],
-        "type": 16
+        "type": 18
       },
       "maxEventTopics": 4,
       "timestamp": {
         "displayName": [
           "Timestamp"
         ],
-        "type": 17
+        "type": 19
       }
     },
     "events": [
@@ -91,7 +91,7 @@
               "displayName": [
                 "String"
               ],
-              "type": 11
+              "type": 12
             }
           },
           {
@@ -102,7 +102,18 @@
               "displayName": [
                 "String"
               ],
-              "type": 11
+              "type": 12
+            }
+          },
+          {
+            "docs": [],
+            "indexed": false,
+            "label": "responsible_account",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 0
             }
           },
           {
@@ -113,7 +124,7 @@
               "displayName": [
                 "ProductStatus"
               ],
-              "type": 14
+              "type": 16
             }
           }
         ],
@@ -136,7 +147,7 @@
         "args": [],
         "default": false,
         "docs": [
-          " Simply returns the current value of our `bool`."
+          " Simply returns the current owner of our `RantaiSuplai`."
         ],
         "label": "get_owner",
         "mutates": false,
@@ -158,13 +169,13 @@
               "displayName": [
                 "AccountId"
               ],
-              "type": 1
+              "type": 0
             }
           }
         ],
         "default": false,
         "docs": [
-          " Simply returns the current value of our `bool`."
+          " Add our `producer` list."
         ],
         "label": "add_producer",
         "mutates": true,
@@ -186,13 +197,13 @@
               "displayName": [
                 "AccountId"
               ],
-              "type": 1
+              "type": 0
             }
           }
         ],
         "default": false,
         "docs": [
-          " Simply returns the current value of our `bool`."
+          " Add our `supplier` list."
         ],
         "label": "add_supplier",
         "mutates": true,
@@ -209,12 +220,124 @@
       {
         "args": [
           {
+            "label": "producer_account",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 0
+            }
+          }
+        ],
+        "default": false,
+        "docs": [
+          " Simply returns the current `producer` account status."
+        ],
+        "label": "is_official_producer",
+        "mutates": false,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 11
+        },
+        "selector": "0x88609d27"
+      },
+      {
+        "args": [
+          {
+            "label": "supplier_account",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 0
+            }
+          }
+        ],
+        "default": false,
+        "docs": [
+          " Simply returns the current `supplier` account status."
+        ],
+        "label": "is_official_supplier",
+        "mutates": false,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 11
+        },
+        "selector": "0x6a9f9791"
+      },
+      {
+        "args": [
+          {
+            "label": "producer_account",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 0
+            }
+          }
+        ],
+        "default": false,
+        "docs": [
+          " Remove account from our `producer` list."
+        ],
+        "label": "remove_producer",
+        "mutates": true,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 8
+        },
+        "selector": "0x177304cb"
+      },
+      {
+        "args": [
+          {
+            "label": "supplier_account",
+            "type": {
+              "displayName": [
+                "AccountId"
+              ],
+              "type": 0
+            }
+          }
+        ],
+        "default": false,
+        "docs": [
+          " Remove account from our `supplier` list."
+        ],
+        "label": "remove_supplier",
+        "mutates": true,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 8
+        },
+        "selector": "0x2b6d7d51"
+      },
+      {
+        "args": [
+          {
             "label": "batch_id",
             "type": {
               "displayName": [
                 "String"
               ],
-              "type": 11
+              "type": 12
             }
           },
           {
@@ -223,13 +346,13 @@
               "displayName": [
                 "String"
               ],
-              "type": 11
+              "type": 12
             }
           }
         ],
         "default": false,
         "docs": [
-          ""
+          " Register product that ready to deliver to the next process."
         ],
         "label": "register_product",
         "mutates": true,
@@ -251,7 +374,7 @@
               "displayName": [
                 "String"
               ],
-              "type": 11
+              "type": 12
             }
           },
           {
@@ -260,13 +383,13 @@
               "displayName": [
                 "String"
               ],
-              "type": 11
+              "type": 12
             }
           }
         ],
         "default": false,
         "docs": [
-          ""
+          " Register product that process in on shipping."
         ],
         "label": "register_out_factory",
         "mutates": true,
@@ -288,7 +411,7 @@
               "displayName": [
                 "String"
               ],
-              "type": 11
+              "type": 12
             }
           },
           {
@@ -297,13 +420,13 @@
               "displayName": [
                 "String"
               ],
-              "type": 11
+              "type": 12
             }
           }
         ],
         "default": false,
         "docs": [
-          ""
+          " Register product that arrived on the supplier for the next process."
         ],
         "label": "register_supplier_arrived",
         "mutates": true,
@@ -325,7 +448,7 @@
               "displayName": [
                 "String"
               ],
-              "type": 11
+              "type": 12
             }
           },
           {
@@ -334,13 +457,13 @@
               "displayName": [
                 "String"
               ],
-              "type": 11
+              "type": 12
             }
           }
         ],
         "default": false,
         "docs": [
-          ""
+          " Register product that has been sold from the supplier."
         ],
         "label": "register_sold_product",
         "mutates": true,
@@ -362,7 +485,7 @@
               "displayName": [
                 "String"
               ],
-              "type": 11
+              "type": 12
             }
           },
           {
@@ -371,13 +494,13 @@
               "displayName": [
                 "String"
               ],
-              "type": 11
+              "type": 12
             }
           }
         ],
         "default": false,
         "docs": [
-          ""
+          " Simply returns the current process of our `RantaiSuplai` product."
         ],
         "label": "get_product_status",
         "mutates": false,
@@ -387,7 +510,7 @@
             "ink",
             "MessageResult"
           ],
-          "type": 12
+          "type": 13
         },
         "selector": "0x0cc6341f"
       }
@@ -402,27 +525,46 @@
               "layout": {
                 "root": {
                   "layout": {
-                    "enum": {
-                      "dispatchKey": "0x864b3226",
-                      "name": "ProductStatus",
-                      "variants": {
-                        "0": {
-                          "fields": [],
-                          "name": "ReadyToDeliver"
+                    "struct": {
+                      "fields": [
+                        {
+                          "layout": {
+                            "enum": {
+                              "dispatchKey": "0x864b3226",
+                              "name": "ProductStatus",
+                              "variants": {
+                                "0": {
+                                  "fields": [],
+                                  "name": "ReadyToDeliver"
+                                },
+                                "1": {
+                                  "fields": [],
+                                  "name": "OnShipping"
+                                },
+                                "2": {
+                                  "fields": [],
+                                  "name": "OnMarket"
+                                },
+                                "3": {
+                                  "fields": [],
+                                  "name": "Sold"
+                                }
+                              }
+                            }
+                          },
+                          "name": "0"
                         },
-                        "1": {
-                          "fields": [],
-                          "name": "OnShipping"
-                        },
-                        "2": {
-                          "fields": [],
-                          "name": "OnMarket"
-                        },
-                        "3": {
-                          "fields": [],
-                          "name": "Done"
+                        {
+                          "layout": {
+                            "leaf": {
+                              "key": "0x864b3226",
+                              "ty": 0
+                            }
+                          },
+                          "name": "1"
                         }
-                      }
+                      ],
+                      "name": "(A, B)"
                     }
                   },
                   "root_key": "0x864b3226"
@@ -436,7 +578,7 @@
                   "layout": {
                     "leaf": {
                       "key": "0x5e51d2e1",
-                      "ty": 0
+                      "ty": 3
                     }
                   },
                   "root_key": "0x5e51d2e1"
@@ -450,7 +592,7 @@
                   "layout": {
                     "leaf": {
                       "key": "0x95658317",
-                      "ty": 0
+                      "ty": 3
                     }
                   },
                   "root_key": "0x95658317"
@@ -462,7 +604,7 @@
               "layout": {
                 "leaf": {
                   "key": "0x00000000",
-                  "ty": 1
+                  "ty": 0
                 }
               },
               "name": "owner"
@@ -479,18 +621,10 @@
       "id": 0,
       "type": {
         "def": {
-          "primitive": "bool"
-        }
-      }
-    },
-    {
-      "id": 1,
-      "type": {
-        "def": {
           "composite": {
             "fields": [
               {
-                "type": 2,
+                "type": 1,
                 "typeName": "[u8; 32]"
               }
             ]
@@ -504,13 +638,21 @@
       }
     },
     {
-      "id": 2,
+      "id": 1,
       "type": {
         "def": {
           "array": {
             "len": 32,
-            "type": 3
+            "type": 2
           }
+        }
+      }
+    },
+    {
+      "id": 2,
+      "type": {
+        "def": {
+          "primitive": "u8"
         }
       }
     },
@@ -518,7 +660,7 @@
       "id": 3,
       "type": {
         "def": {
-          "primitive": "u8"
+          "primitive": "bool"
         }
       }
     },
@@ -600,7 +742,7 @@
               {
                 "fields": [
                   {
-                    "type": 1
+                    "type": 0
                   }
                 ],
                 "index": 0,
@@ -621,7 +763,7 @@
         "params": [
           {
             "name": "T",
-            "type": 1
+            "type": 0
           },
           {
             "name": "E",
@@ -726,6 +868,10 @@
               {
                 "index": 0,
                 "name": "UnauthorizedCaller"
+              },
+              {
+                "index": 1,
+                "name": "InvalidProcess"
               }
             ]
           }
@@ -741,20 +887,12 @@
       "id": 11,
       "type": {
         "def": {
-          "primitive": "str"
-        }
-      }
-    },
-    {
-      "id": 12,
-      "type": {
-        "def": {
           "variant": {
             "variants": [
               {
                 "fields": [
                   {
-                    "type": 13
+                    "type": 3
                   }
                 ],
                 "index": 0,
@@ -775,7 +913,7 @@
         "params": [
           {
             "name": "T",
-            "type": 13
+            "type": 3
           },
           {
             "name": "E",
@@ -788,7 +926,57 @@
       }
     },
     {
+      "id": 12,
+      "type": {
+        "def": {
+          "primitive": "str"
+        }
+      }
+    },
+    {
       "id": 13,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "fields": [
+                  {
+                    "type": 14
+                  }
+                ],
+                "index": 0,
+                "name": "Ok"
+              },
+              {
+                "fields": [
+                  {
+                    "type": 6
+                  }
+                ],
+                "index": 1,
+                "name": "Err"
+              }
+            ]
+          }
+        },
+        "params": [
+          {
+            "name": "T",
+            "type": 14
+          },
+          {
+            "name": "E",
+            "type": 6
+          }
+        ],
+        "path": [
+          "Result"
+        ]
+      }
+    },
+    {
+      "id": 14,
       "type": {
         "def": {
           "variant": {
@@ -800,7 +988,7 @@
               {
                 "fields": [
                   {
-                    "type": 14
+                    "type": 15
                   }
                 ],
                 "index": 1,
@@ -812,7 +1000,7 @@
         "params": [
           {
             "name": "T",
-            "type": 14
+            "type": 15
           }
         ],
         "path": [
@@ -821,7 +1009,18 @@
       }
     },
     {
-      "id": 14,
+      "id": 15,
+      "type": {
+        "def": {
+          "tuple": [
+            16,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "id": 16,
       "type": {
         "def": {
           "variant": {
@@ -840,7 +1039,7 @@
               },
               {
                 "index": 3,
-                "name": "Done"
+                "name": "Sold"
               }
             ]
           }
@@ -853,7 +1052,7 @@
       }
     },
     {
-      "id": 15,
+      "id": 17,
       "type": {
         "def": {
           "primitive": "u128"
@@ -861,13 +1060,13 @@
       }
     },
     {
-      "id": 16,
+      "id": 18,
       "type": {
         "def": {
           "composite": {
             "fields": [
               {
-                "type": 2,
+                "type": 1,
                 "typeName": "[u8; 32]"
               }
             ]
@@ -881,7 +1080,7 @@
       }
     },
     {
-      "id": 17,
+      "id": 19,
       "type": {
         "def": {
           "primitive": "u64"
@@ -889,7 +1088,7 @@
       }
     },
     {
-      "id": 18,
+      "id": 20,
       "type": {
         "def": {
           "primitive": "u32"
@@ -897,7 +1096,7 @@
       }
     },
     {
-      "id": 19,
+      "id": 21,
       "type": {
         "def": {
           "variant": {}
