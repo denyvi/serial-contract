@@ -22,11 +22,9 @@ use subxt::tx::PairSigner;
 use subxt::utils::MultiAddress;
 use subxt::{OnlineClient, PolkadotConfig};
 
-pub const CALLER_SIGNER: &str = "5ExcvnRUfE9dWBgma5DCVeENgiq2jEo1cY4pW7J8yqvjTE3C";
-pub const CALLER_PHRASE: &str =
-    "flag repeat rubber donate track dish author target company ritual frame report";
+pub const CALLER_PHRASE: &str = "YOUR MNEMONIC";
 pub const CONTRACT_ADDRESS: &str = "gr4LugUgbox1qh3JdjMsecmqREXvDCmAwVc5GhyhQjgei3HyS";
-pub const CONTRACT_METADATA: &str = "/home/orangepi/try_serial/resources/rantai_suplai.json";
+pub const CONTRACT_METADATA: &str = "./resources/rantai_suplai.json";
 // pub const CONTRACT_METHOD: &str = "register_product";
 pub const CONTRACT_METHOD: &str = "register_out_factory";
 // pub const CONTRACT_METHOD: &str = "register_supplier_arrived";
